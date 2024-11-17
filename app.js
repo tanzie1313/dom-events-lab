@@ -1,81 +1,58 @@
 /*-------------------------------- Constants --------------------------------*/
-
+// const calculator = document.querySelector("#calculator");
+const buttons = document.querySelectorAll(".button");
+const display = document.querySelector(".display");
 /*-------------------------------- Variables --------------------------------*/
+let currentOperator = "";
 let number1 = "";
 let number2 = "";
-let currentOperatior  = "";
 let result = "";
-// let isOperatorClicked = false;
-
+//let isOperator = false;
+let displayValue = "";
+let clear = "";
 /*------------------------ Cached Element References ------------------------*/
-const buttons = document.querySelectorAll('.button');
-const display = document.querySelector('.display');
-const calculator = document.querySelector('#calculator');
-display.innerText = "0";
+
+display.innerText = 0 
 /*----------------------------- Event Listeners -----------------------------*/
 buttons.forEach((button) => {
-    button.addEventListener('click', handlebuttonClick);
+  button.addEventListener("click", handleButtonclick)
 });
-  
-  
+
 /*-------------------------------- Functions --------------------------------*/
-buttons.forEach((button) => {
-  button.addEventListener('click', handlebuttonClick);
-} );
-
-
-function handlebuttonClick(event) {
-  const clickedbuttonValue = event.target.innerText;
-  if (!isNaN(clickedbuttonValue)) {
-    display.innerText = " ";
-    handleNumberClick(clickedbuttonValue);
-   
-    // console.log('number clicked');
-    
-    } else if ([ "+", "-", "*", "/"].includes(clickedbuttonValue)) {
-      handleOperatorClick(clickedbuttonValue);
-      currentOperatior = clickedbuttonValue;
-      number1 = parseFloat(display.innerText);
-      display.innerText = " ";
-      handleOperatorClick(clickedbuttonValue);
-    } else if (clickedbuttonValue === "=") {
-      number2 = parseFloat(display.innerText);
-      console.log(number1, currentOperatior, number2);
-      switch (currentOperatior) {
-        case "+":
-          result = number1 + number2;
-          console.log(result);
-          break;
-        case "-":
-          result = number1 - number2;
-          console.log(result);
-          break;
-        case "*":
-          result = number1 * number2;
-          console.log(result);
-          break;
-        case "/":
-          result = number1 / number2;
-          console.log(result);
-          break;
-          default:
-            return;
-      }
-      
-      display.innerText = result;
-    } if (clickedbuttonValue === "C") {
-      display.innerText = "0";
-      number1 = "";
-      number2 = "";
-      currentOperatior = "";
-      result = "";
+function handleButtonclick(event) {
+  const clickedButtonvalue = event.target.innerText
+  if (!isNaN(clickedButtonvalue)) {
+     displayValue += clickedButtonvalue; //concationation operatior 
+    display.innerText = displayValue;
+  } else if(["+","-","*","/"].includes(clickedButtonvalue)) {
+    number1 = displayValue;
+    currentOperator = clickedButtonvalue;
+    displayValue = "";
+    //console.log('clicked number');
+  } else if (clickedButtonvalue === "="){
+      number2 = displayValue;
+    const num1 = parseFloat(number1);
+    const num2 = parseFloat(number2);
+    switch(currentOperator){
+      case "+":
+        result = num1 + num2;
+        break
+      case  "-":
+        result = num1 - num2;
+        break
+      case "*":
+        result = num1 * num2;
+        break
+      case "/":
+        result = num1 / num2;
+        break
+      default:
+          return
     }
-}
-
-function handleNumberClick(number) {
-  display.innerText += number;
-
-};
-function handleOperatorClick(operator) {
- currentOperatior = operator;
+    displayValue = result;
+    display.innerText = displayValue;
+  } else if (clickedButtonvalue === "C") {  //move the (clickeButtonvalue in else if statement)
+    displayValue = clear;
+    display.innerText = 0;
+  }
 };
