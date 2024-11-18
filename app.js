@@ -36,15 +36,19 @@ function handleButtonclick(event) {
     switch(currentOperator){
       case "+":
         result = num1 + num2;
+        // console.log(result);
         break
       case  "-":
         result = num1 - num2;
+        // console.log(result);
         break
       case "*":
         result = num1 * num2;
+        // console.log(result);
         break
       case "/":
         result = num1 / num2;
+        // console.log(result);
         break
       default:
           return
