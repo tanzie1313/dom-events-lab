@@ -31,7 +31,7 @@ function handleButtonclick(event) {
     //console.log('clicked number');
   } else if (clickedButtonvalue === "="){
       number2 = displayValue;
-    const num1 = parseFloat(number1);
+    const num1 = parseFloat(number1); ///parsefloat  string into number //parseInt string to integar
     const num2 = parseFloat(number2);
     switch(currentOperator){
       case "+":
